@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>JavaScript Practice - Word Counter</title>
+<body>
+    <h1>Sample Text</h1>
+    <div class="word_box">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea adipisci hic ipsa nobis consequatur voluptatum sunt, repellat ipsam, iste distinctio sit officiis, ipsum asperiores accusantium ratione odio. Ex, maxime autem? Voluptate ut nisi in ad fugiat nulla. Nisi consectetur tempor excepteur dolor ea ipsum labore voluptate eiusmod adipisicing tempor. Incididunt esse duis minim excepteur sint cupidatat Lorem in minim nisi ex elit esse et. Nostrud deserunt aliqua esse reprehenderit laborum consectetur aliqua laboris. Dolor reprehenderit excepteur deserunt nostrud ipsum et eiusmod commodo mollit qui.
+    </div>
+    <hr>
+
+    <div id="counting"></div>
+</body>
+<script>
+
+    var counts = {};
+    var keys = [];
+    var txt = document.getElementsByClassName('word_box')[0].innerText;
+    var tokens = txt.split(/\W+/);
+
+    for( var i = 0; i < tokens.length; i++ ){
+
+        var word = tokens[i].toLowerCase();
+
+        if( !/\d+/.test(word) && word !== '' ){
+            if( counts[word] === undefined ){
+                counts[word] = 1;
+                keys.push(word);
+            } else {
+                counts[word]++; 
+            }
+        }
+
+    }
+
+    keys.sort(compare);
+
+    function compare(a, b){
+        var countA = counts[a];
+        var countB = counts[b];
+        return countA - countB;
+    }
+
+    for( var i = 0; i < keys.length; i++ ){
+        var key = keys[i];
+
+        console.log(keys[i] + ' ' + counts[key]);
+    }
+</script>
+</html>
